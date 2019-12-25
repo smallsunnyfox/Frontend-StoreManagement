@@ -42,6 +42,12 @@
       </el-form-item>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
+    <div class="login-footer">
+      <p>本网站基于<a href="https://github.com/PanJiaChen/vue-admin-template/" target="_blank">vue-admin-template</a>创建</p>
+      <p>本网站属于个人的非赢利性网站，仅供学习参考</p>
+      <a href="https://github.com/smallsunnyfox/Frontend-StoreManagement" target="_blank">仓库地址</a> /
+      <a href="http://www.beian.miit.gov.cn/" target="_blank">备案号：豫ICP备19035192号</a>
+    </div>
   </div>
 </template>
 
@@ -201,6 +207,14 @@ $light_gray: cornflowerblue;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+
+  .login-footer {
+    color: cornflowerblue;
+    text-align: center;
+    a:hover {
+      text-decoration: underline;
+    }
   }
 }
 </style>

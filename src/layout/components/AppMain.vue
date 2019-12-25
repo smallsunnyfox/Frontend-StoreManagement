@@ -4,7 +4,7 @@
       <router-view :key="key" />
     </transition>
     <div class="app-footer">
-      备案号
+      <a href="http://www.beian.miit.gov.cn/" target="_blank">备案号：豫ICP备19035192号</a>
     </div>
   </section>
 </template>

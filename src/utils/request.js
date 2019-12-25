@@ -1,7 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
-import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { Message } from 'element-ui'
 
 // create an axios instance
 const service = axios.create({
@@ -35,13 +33,20 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    if (res.code) {
+    if (res.code && res.code !== 'success') {
       Message({
-        message: res.message || 'Error',
+        message: res.message || '操作失败',
         type: 'error',
         duration: 5 * 1000
       })
       return Promise.reject(new Error(res.message || 'Error'))
+    } else if (res.code && res.code === 'success') {
+      Message({
+        message: res.message || '操作成功',
+        type: 'success',
+        duration: 5 * 1000
+      })
+      return res
     } else {
       return res
     }

@@ -1,11 +1,39 @@
 import request from '@/utils/request'
-import qs from 'qs'
 export default {
   login(data) {
     return request({
-      url: 'user/login',
+      url: 'login',
       method: 'POST',
-      data: qs.stringify(data)
+      data
+    })
+  },
+  getListByRole(role) {
+    return request({
+      url: 'user/getListByRole',
+      method: 'GET',
+      params: {
+        role
+      }
+    })
+  },
+  addUser(data) {
+    return request({
+      url: 'user',
+      method: 'POST',
+      data
+    })
+  },
+  editUser(data) {
+    return request({
+      url: 'user',
+      method: 'PUT',
+      data
+    })
+  },
+  deleteUser(id) {
+    return request({
+      url: `user/${id}`,
+      method: 'DELETE'
     })
   }
 }

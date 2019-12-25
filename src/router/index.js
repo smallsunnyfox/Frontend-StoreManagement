@@ -72,11 +72,6 @@ export const constantRoutes = [
         path: 'salelist',
         component: () => import('@/views/good/salelist'),
         meta: { title: '销售管理' }
-      },
-      {
-        path: 'category',
-        component: () => import('@/views/good/salelist'),
-        meta: { title: '类别管理' }
       }
     ]
   },
@@ -96,7 +91,7 @@ export const constantRoutes = [
     children: [{
       path: '',
       name: 'Client',
-      component: () => import('@/views/client/index'),
+      component: () => import('@/views/user/index'),
       meta: { title: '客户管理', icon: 'client' }
     }]
   },
@@ -106,7 +101,7 @@ export const constantRoutes = [
     children: [{
       path: '',
       name: 'Supplier',
-      component: () => import('@/views/supplier/index'),
+      component: () => import('@/views/user/index'),
       meta: { title: '供应商管理', icon: 'supplier' }
     }]
   },

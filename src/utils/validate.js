@@ -14,7 +14,16 @@ export function isExternal(path) {
  * @param {string} str
  * @returns {Boolean}
  */
-export function validUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+export function validatePhone(str) {
+  if (!str) {
+    return false
+  }
+  str = str.trim()
+  if (str !== '') {
+    const reg = /(^1\d{10}$)/
+    if (reg.test(str)) {
+      return true
+    }
+  }
+  return false
 }
