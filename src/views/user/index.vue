@@ -16,28 +16,68 @@
           @change="changeFilter"
           @keyup.enter.native="changeFilter"
         />
-        <el-select v-model="queryVo.sex" placeholder="请选择性别" class="filter-item" clearable @change="changeFilter">
+        <el-select
+          v-model="queryVo.sex"
+          placeholder="请选择性别"
+          class="filter-item"
+          clearable
+          @change="changeFilter"
+        >
           <el-option value="男">男</el-option>
           <el-option value="女">女</el-option>
         </el-select>
-        <el-button type="primary" @click="changeFilter">搜索</el-button>
-        <el-button style="margin-left: 0;" @click="resetFilter">清除筛选</el-button>
+        <el-button
+          type="primary"
+          @click="changeFilter"
+        >搜索</el-button>
+        <el-button
+          style="margin-left: 0;"
+          @click="resetFilter"
+        >清除筛选</el-button>
       </div>
       <div>
-        <el-button type="primary" @click="addClient">
+        <el-button
+          type="primary"
+          @click="addClient"
+        >
           {{ role === 'client' ? '添加客户' : '添加供应商' }}
         </el-button>
       </div>
     </div>
     <div class="list-container">
-      <el-table v-loading="tableLoading" :data="list" border>
-        <el-table-column prop="idName" :label="role === 'client' ? '客户名' : '供应商名'" />
-        <el-table-column prop="gender" :label="role === 'client' ? '客户性别' : '供应商性别'" />
-        <el-table-column prop="phone" :label="role === 'client' ? '客户手机号' : '供应商手机号'" />
-        <el-table-column label="操作" width="100px" align="center">
+      <el-table
+        v-loading="tableLoading"
+        :data="list"
+        border
+      >
+        <el-table-column
+          prop="idName"
+          :label="role === 'client' ? '客户名' : '供应商名'"
+        />
+        <el-table-column
+          prop="gender"
+          :label="role === 'client' ? '客户性别' : '供应商性别'"
+        />
+        <el-table-column
+          prop="phone"
+          :label="role === 'client' ? '客户手机号' : '供应商手机号'"
+        />
+        <el-table-column
+          label="操作"
+          width="100px"
+          align="center"
+        >
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="editClient(scope.row)">编辑</el-button>
-            <el-button type="text" size="small" @click="deleteClient(scope.row)">删除</el-button>
+            <el-button
+              type="text"
+              size="small"
+              @click="editClient(scope.row)"
+            >编辑</el-button>
+            <el-button
+              type="text"
+              size="small"
+              @click="deleteClient(scope.row)"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -52,44 +92,96 @@
         @current-change="changePage"
       />
     </div> -->
-    <el-dialog :visible.sync="showAddClient" :title="role === 'client' ? '添加客户' : '添加供应商'" width="500px">
-      <el-form ref="addClientForm" :model="addClientForm" :rules="addClientRule" label-width="80px" label-position="left">
-        <el-form-item prop="name" label="姓名">
+    <el-dialog
+      :visible.sync="showAddClient"
+      :title="role === 'client' ? '添加客户' : '添加供应商'"
+      width="500px"
+    >
+      <el-form
+        ref="addClientForm"
+        :model="addClientForm"
+        :rules="addClientRule"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item
+          prop="name"
+          label="姓名"
+        >
           <el-input v-model="addClientForm.name" />
         </el-form-item>
-        <el-form-item prop="sex" label="性别">
-          <el-select v-model="addClientForm.sex" style="width:100%;">
+        <el-form-item
+          prop="sex"
+          label="性别"
+        >
+          <el-select
+            v-model="addClientForm.sex"
+            style="width:100%;"
+          >
             <el-option value="男">男</el-option>
             <el-option value="女">女</el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="phone" label="手机号">
+        <el-form-item
+          prop="phone"
+          label="手机号"
+        >
           <el-input v-model="addClientForm.phone" />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="cancelAddClient">取 消</el-button>
-        <el-button :loading="submitAddClientLoading" type="primary" @click="submitAddClient">确 定</el-button>
+        <el-button
+          :loading="submitAddClientLoading"
+          type="primary"
+          @click="submitAddClient"
+        >确 定</el-button>
       </div>
     </el-dialog>
-    <el-dialog :visible.sync="showEditClient" :title="role === 'client' ? '编辑客户' : '编辑供应商'" width="500px">
-      <el-form ref="editClientForm" :model="editClientForm" :rules="addClientRule" label-width="80px" label-position="left">
-        <el-form-item prop="name" label="姓名">
+    <el-dialog
+      :visible.sync="showEditClient"
+      :title="role === 'client' ? '编辑客户' : '编辑供应商'"
+      width="500px"
+    >
+      <el-form
+        ref="editClientForm"
+        :model="editClientForm"
+        :rules="addClientRule"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item
+          prop="name"
+          label="姓名"
+        >
           <el-input v-model="editClientForm.name" />
         </el-form-item>
-        <el-form-item prop="sex" label="性别">
-          <el-select v-model="editClientForm.sex" style="width:100%;">
+        <el-form-item
+          prop="sex"
+          label="性别"
+        >
+          <el-select
+            v-model="editClientForm.sex"
+            style="width:100%;"
+          >
             <el-option value="男">男</el-option>
             <el-option value="女">女</el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="phone" label="手机号">
+        <el-form-item
+          prop="phone"
+          label="手机号"
+        >
           <el-input v-model="editClientForm.phone" />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="cancelEditClient">取 消</el-button>
-        <el-button :loading="submitEditClientLoading" type="primary" @click="submitEditClient">确 定</el-button>
+        <el-button
+          :loading="submitEditClientLoading"
+          type="primary"
+          @click="submitEditClient"
+        >确 定</el-button>
       </div>
     </el-dialog>
   </div>

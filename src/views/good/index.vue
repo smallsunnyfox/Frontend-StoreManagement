@@ -16,79 +16,218 @@
           @change="changeFilter"
           @keyup.enter.native="changeFilter"
         />
-        <el-button type="primary" @click="changeFilter">搜索</el-button>
-        <el-button style="margin-left: 0;" @click="resetFilter">清除筛选</el-button>
+        <el-button
+          type="primary"
+          @click="changeFilter"
+        >搜索</el-button>
+        <el-button
+          style="margin-left: 0;"
+          @click="resetFilter"
+        >清除筛选</el-button>
       </div>
       <div>
-        <el-button type="primary" @click="addGood">添加商品</el-button>
+        <el-button
+          type="primary"
+          @click="addGood"
+        >添加商品</el-button>
       </div>
     </div>
     <div class="list-container">
-      <el-table v-loading="listLoading" :data="list" border>
-        <el-table-column prop="goodName" label="商品名称" />
-        <el-table-column prop="goodCategory" label="商品类别" />
-        <el-table-column prop="goodUnit" label="商品单位" />
-        <el-table-column prop="entryPrice" label="进货价格" align="center" />
-        <el-table-column prop="salePrice" label="零售价格" align="center" />
-        <el-table-column prop="goodNum" label="商品库存" align="center" />
-        <el-table-column label="操作" width="100px" align="center">
+      <el-table
+        v-loading="listLoading"
+        :data="list"
+        border
+      >
+        <el-table-column
+          prop="goodName"
+          label="商品名称"
+        />
+        <el-table-column
+          prop="goodCategory"
+          label="商品类别"
+        />
+        <el-table-column
+          prop="goodUnit"
+          label="商品单位"
+        />
+        <el-table-column
+          prop="entryPrice"
+          label="进货价格"
+          align="center"
+        />
+        <el-table-column
+          prop="salePrice"
+          label="零售价格"
+          align="center"
+        />
+        <el-table-column
+          prop="goodNum"
+          label="商品库存"
+          align="center"
+        />
+        <el-table-column
+          label="操作"
+          width="100px"
+          align="center"
+        >
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="editGood(scope.row, scope.$index)">编辑</el-button>
-            <el-button type="text" size="small" @click="deleteGood(scope.row)">删除</el-button>
+            <el-button
+              type="text"
+              size="small"
+              @click="editGood(scope.row, scope.$index)"
+            >编辑</el-button>
+            <el-button
+              type="text"
+              size="small"
+              @click="deleteGood(scope.row)"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog :visible.sync="addGoodDialog" title="添加商品" width="700px">
-      <el-form ref="addGoodForm" :model="addGoodForm" :rules="goodFormRules" label-width="80px" label-position="left">
-        <el-form-item prop="goodName" label="商品名称">
+    <el-dialog
+      :visible.sync="addGoodDialog"
+      title="添加商品"
+      width="700px"
+    >
+      <el-form
+        ref="addGoodForm"
+        :model="addGoodForm"
+        :rules="goodFormRules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item
+          prop="goodName"
+          label="商品名称"
+        >
           <el-input v-model="addGoodForm.goodName" />
         </el-form-item>
-        <el-form-item prop="goodCategory" label="商品类别">
+        <el-form-item
+          prop="goodCategory"
+          label="商品类别"
+        >
           <el-input v-model="addGoodForm.goodCategory" />
         </el-form-item>
-        <el-form-item prop="goodUnit" label="商品单位">
+        <el-form-item
+          prop="goodUnit"
+          label="商品单位"
+        >
           <el-input v-model="addGoodForm.goodUnit" />
         </el-form-item>
-        <el-form-item prop="entryPrice" label="进货价格">
-          <el-input-number v-model="addGoodForm.entryPrice" :step="50" :precision="2" :min="0" />
+        <el-form-item
+          prop="entryPrice"
+          label="进货价格"
+        >
+          <el-input-number
+            v-model="addGoodForm.entryPrice"
+            :step="50"
+            :precision="2"
+            :min="0"
+          />
         </el-form-item>
-        <el-form-item prop="salePrice" label="零售价格">
-          <el-input-number v-model="addGoodForm.salePrice" :step="50" :precision="2" :min="0" />
+        <el-form-item
+          prop="salePrice"
+          label="零售价格"
+        >
+          <el-input-number
+            v-model="addGoodForm.salePrice"
+            :step="50"
+            :precision="2"
+            :min="0"
+          />
         </el-form-item>
-        <el-form-item prop="goodNum" label="商品库存">
-          <el-input-number v-model="addGoodForm.goodNum" :step="50" :min="0" />
+        <el-form-item
+          prop="goodNum"
+          label="商品库存"
+        >
+          <el-input-number
+            v-model="addGoodForm.goodNum"
+            :step="50"
+            :min="0"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="cancelAddGood">取 消</el-button>
-        <el-button :loading="submitAddGoodLoading" type="primary" @click="submitAddGood">确 定</el-button>
+        <el-button
+          :loading="submitAddGoodLoading"
+          type="primary"
+          @click="submitAddGood"
+        >确 定</el-button>
       </div>
     </el-dialog>
-    <el-dialog :visible.sync="editGoodDialog" title="编辑商品" width="700px">
-      <el-form ref="editGoodForm" :model="editGoodForm" :rules="goodFormRules" label-width="80px" label-position="left">
-        <el-form-item prop="goodName" label="商品名称">
+    <el-dialog
+      :visible.sync="editGoodDialog"
+      title="编辑商品"
+      width="700px"
+    >
+      <el-form
+        ref="editGoodForm"
+        :model="editGoodForm"
+        :rules="goodFormRules"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item
+          prop="goodName"
+          label="商品名称"
+        >
           <el-input v-model="editGoodForm.goodName" />
         </el-form-item>
-        <el-form-item prop="goodCategory" label="商品类别">
+        <el-form-item
+          prop="goodCategory"
+          label="商品类别"
+        >
           <el-input v-model="editGoodForm.goodCategory" />
         </el-form-item>
-        <el-form-item prop="goodUnit" label="商品单位">
+        <el-form-item
+          prop="goodUnit"
+          label="商品单位"
+        >
           <el-input v-model="editGoodForm.goodUnit" />
         </el-form-item>
-        <el-form-item prop="entryPrice" label="进货价格">
-          <el-input-number v-model="editGoodForm.entryPrice" :step="50" :precision="2" :min="0" />
+        <el-form-item
+          prop="entryPrice"
+          label="进货价格"
+        >
+          <el-input-number
+            v-model="editGoodForm.entryPrice"
+            :step="50"
+            :precision="2"
+            :min="0"
+          />
         </el-form-item>
-        <el-form-item prop="salePrice" label="零售价格">
-          <el-input-number v-model="editGoodForm.salePrice" :step="50" :precision="2" :min="0" />
+        <el-form-item
+          prop="salePrice"
+          label="零售价格"
+        >
+          <el-input-number
+            v-model="editGoodForm.salePrice"
+            :step="50"
+            :precision="2"
+            :min="0"
+          />
         </el-form-item>
-        <el-form-item prop="goodNum" label="商品库存">
-          <el-input-number v-model="editGoodForm.goodNum" disabled :step="50" :min="0" />
+        <el-form-item
+          prop="goodNum"
+          label="商品库存"
+        >
+          <el-input-number
+            v-model="editGoodForm.goodNum"
+            disabled
+            :step="50"
+            :min="0"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="cancelEditGood">取 消</el-button>
-        <el-button :loading="submitEditGoodLoading" type="primary" @click="submitEditGood">确 定</el-button>
+        <el-button
+          :loading="submitEditGoodLoading"
+          type="primary"
+          @click="submitEditGood"
+        >确 定</el-button>
       </div>
     </el-dialog>
   </div>
