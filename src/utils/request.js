@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
+import store from '@/store'
 
 // create an axios instance
 const service = axios.create({
@@ -33,28 +34,26 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    if (res.code && res.code !== 'success') {
-      Message({
-        message: res.message || '操作失败',
-        type: 'error',
-        duration: 5 * 1000
+    if (res.codeName && res.codeName === 'LOGIN-00001') {
+      MessageBox.confirm('您已退出, 可以取消停留在当前页面,或者重新登录', '注销', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        store.dispatch('user/resetToken').then(() => {
+          location.reload()
+        })
+      }).catch(() => {
+
       })
-      return Promise.reject(new Error(res.message || 'Error'))
-    } else if (res.code && res.code === 'success') {
-      Message({
-        message: res.message || '操作成功',
-        type: 'success',
-        duration: 5 * 1000
-      })
-      return res
+      return Promise.reject(new Error('Not logined'))
     } else {
       return res
     }
   },
   error => {
-    console.log('err' + error) // for debug
     Message({
-      message: error.message,
+      message: '服务器开小差了QAQ',
       type: 'error',
       duration: 5 * 1000
     })

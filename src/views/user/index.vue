@@ -248,6 +248,8 @@ export default {
       user.getListByRole(this.role).then(res => {
         this.list = res
         this.tableLoading = false
+      }).catch(err => {
+        console.log(err)
       })
     },
     changeFilter() {
