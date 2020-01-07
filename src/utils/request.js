@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
+import storage from '@/utils/storage'
 
 // create an axios instance
 const service = axios.create({
@@ -12,6 +13,10 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
+    if (storage.get('token')) {
+      // 让每个请求携带令牌
+      config.headers['TOKEN'] = storage.get('token')
+    }
     return config
   },
   error => {

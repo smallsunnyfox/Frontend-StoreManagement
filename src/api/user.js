@@ -30,6 +30,12 @@ export default {
       data
     })
   },
+  getUserInfo(id) {
+    return request({
+      url: `user/${id}`,
+      method: 'GET'
+    })
+  },
   deleteUser(id) {
     return request({
       url: `user/${id}`,

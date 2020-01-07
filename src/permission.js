@@ -1,9 +1,8 @@
 import router from './router'
 import store from './store'
-import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { getToken } from '@/utils/auth' // get token from cookie
+import storage from '@/utils/storage' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -18,7 +17,7 @@ router.beforeEach(async(to, from, next) => {
   document.title = getPageTitle(to.meta.title)
 
   // determine whether the user has logged in
-  const hasToken = getToken()
+  const hasToken = storage.get('token')
   const hasGetUserInfo = store.getters.name
 
   if (hasToken) {
@@ -29,7 +28,7 @@ router.beforeEach(async(to, from, next) => {
       if (hasGetUserInfo) {
         next()
       } else {
-        store.dispatch('user/setInfo', hasToken)
+        store.dispatch('user/setInfo', storage.get('name'))
         next()
         NProgress.done()
       }

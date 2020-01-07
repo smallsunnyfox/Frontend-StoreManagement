@@ -25,7 +25,8 @@ module.exports = {
     proxy: {
       // 配置跨域   http://store.guoyw.com/swagger-ui.html
       '/api': {
-        target: 'http://store.guoyw.com',
+        target: 'http://192.168.31.130:8080',
+        // target: 'http://store.guoyw.com',
         ws: true,
         changOrigin: true
       }
